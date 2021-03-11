@@ -21,6 +21,8 @@ class Dot(Sprite):
 
 class PillarPair(Sprite):
     def update(self):
+        if self.x == -100:
+            self.x = CANVAS_WIDTH
         self.x += PILLAR_SPEED
 
 
