@@ -1,5 +1,6 @@
 import tkinter as tk
 from gamelib import Sprite, GameApp, Text
+from random import randint
 
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 500
@@ -21,9 +22,18 @@ class Dot(Sprite):
 
 class PillarPair(Sprite):
     def update(self):
-        if self.x == -100:
+        if self.is_out_of_screen():
             self.x = CANVAS_WIDTH
         self.x += PILLAR_SPEED
+
+    def is_out_of_screen(self):
+        return self.x == -100
+
+    def reset_position(self):
+        self.x = CANVAS_WIDTH + 100
+
+    def random_height(self):
+        self.y = randint(100, CANVAS_HEIGHT - 100)
 
 
 class FlappyGame(GameApp):
@@ -35,12 +45,15 @@ class FlappyGame(GameApp):
 
     def init_game(self):
         self.create_sprites()
+        self.pillar_pair.random_height()
 
     def pre_update(self):
         pass
 
     def post_update(self):
-        pass
+        if self.pillar_pair.is_out_of_screen():
+            self.pillar_pair.reset_position()
+            self.pillar_pair.random_height()
 
     def on_key_pressed(self, event):
         pass
