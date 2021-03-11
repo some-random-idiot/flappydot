@@ -18,11 +18,16 @@ class Dot(Sprite):
         self.vy += GRAVITY
 
 
+class PillarPair(Sprite):
+    pass
+
+
 class FlappyGame(GameApp):
     def create_sprites(self):
         self.dot = Dot(self, 'images/dot.png', CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-
         self.elements.append(self.dot)
+        self.pillar_pair = PillarPair(self, 'images/pillar-pair.png', CANVAS_WIDTH, CANVAS_HEIGHT // 2)
+        self.elements.append(self.pillar_pair)
 
     def init_game(self):
         self.create_sprites()
