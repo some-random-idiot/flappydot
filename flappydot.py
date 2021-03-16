@@ -9,6 +9,7 @@ UPDATE_DELAY = 33
 GRAVITY = 2.5
 STARTING_VELOCITY = -30
 PILLAR_SPEED = -10
+JUMP_VELOCITY = -20
 
 
 class Dot(Sprite):
@@ -23,6 +24,9 @@ class Dot(Sprite):
 
     def start(self):
         self.is_started = True
+
+    def jump(self):
+        self.vy = JUMP_VELOCITY
 
 
 class PillarPair(Sprite):
@@ -62,6 +66,7 @@ class FlappyGame(GameApp):
 
     def on_key_pressed(self, event):
         self.dot.start()
+        self.dot.jump()
 
 
 if __name__ == "__main__":
