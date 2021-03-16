@@ -14,10 +14,15 @@ PILLAR_SPEED = -10
 class Dot(Sprite):
     def init_element(self):
         self.vy = STARTING_VELOCITY
+        self.is_started = False
 
     def update(self):
-        self.y += self.vy
-        self.vy += GRAVITY
+        if self.is_started:
+            self.y += self.vy
+            self.vy += GRAVITY
+
+    def start(self):
+        self.is_started = True
 
 
 class PillarPair(Sprite):
@@ -56,7 +61,7 @@ class FlappyGame(GameApp):
             self.pillar_pair.random_height()
 
     def on_key_pressed(self, event):
-        pass
+        self.dot.start()
 
 
 if __name__ == "__main__":
